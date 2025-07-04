@@ -1,0 +1,161 @@
+
+meteoMonitor
+Installation and Maintenance Manual
+@(#) $Id:$
+
+
+
+===UNPACK and PREPARE
+
+- back-up the plot archive (if available):
+   cd  SOURCES/meteoMonitor/src
+   make update
+
+   if you do so, the module must be re-archived with the updated content.
+
+- clean:
+   cd SOURCES/meteoMonitor/src
+   make mrproper 
+   note that this removes all the content of the target directory
+   (while preserving the lasc subdir if it exists)
+
+
+===CONFIGURE:
+
+in SOURCE/meteoMonitor/config
+
+- edit config.sm (that will become SuperMongo's  ~/.sm)
+  update the paths if needed
+
+- edit meteo.config
+  update the URLs if needed. 
+  These are used in the automatically generated web pages for reload etc.
+
+- edit meteo_msg.txt
+  to add a message (in html) to be displayed at the bottom of the page
+
+- edit meteorun
+  update the paths (if needed)
+
+===INSTALL 
+
+-  cd SOURCE/meteoMonitor/src
+   make all install clean
+
+-  if the compilation complains about SM subroutines (eg ""c_type
+   symbol not found"), you need to recompile the SM libraries:
+   cd SOURCE/meteoMonitor/src
+   make smLibs
+
+
+
+
+===RUN
+
+- cd ~/dimm  (link to the web directory)
+
+
+- debug and test:
+    meteorun
+
+- for normal operation, refer to README 
+
+
+
+
+
+===MAINTENANCE
+
+- How to kill/restart meteomonitor
+  ps -ef | grep meteorun
+  kill all the processes found (there should be one. If there were 0
+      or more than one, there was a problem)  
+  cd ~/dimm   (i.e. to the web directory)
+  meteorun >& /dev/null &
+
+
+- How to change the message at the bottom of the page?
+  edit config/meteo_msg.txt
+  cd scr
+  make update
+
+
+
+
+
+- Work flow:
+    meteorun (Cshell script)
+        ftp the data in
+        read_dimm: converts the data format
+        meteoli : generate dynamic web pages and plots (PS)
+	call various standard utilities to convert PS to Gif
+	move files around
+	sleep and iterate
+
+
+- file:
+   src/
+        makefile
+        read_dimm.f : reads the data from files from different
+		      sources, and convert them into a single dimm.dat
+		      (FIFO, 800 lines) 
+        meteoli.f :   main program, reads dimm.dat, produces the plots
+		      PS format) and the web pages
+
+                      Note that the current supermongo compilation
+                      requires subroutines with fsm_ prefix. This
+                      might change in the future; for instance,
+                      SciSoft compilation requires subroutines with
+                      sm_ prefix.
+        
+   config/
+        meteo.config : configuration, contains HTTP addresses needed
+			by meteoli
+        config.sm :    configuration file for SuperMongo. Will be
+			copied to ~/.sm
+        graphcap.meteoli : additional devices for SuperMongo. Will be 
+			copied to ~/.graphcap.meteoli
+
+	meteo_msg.txt : HTML code to be added at the bottom of the
+                      meteomonitor page.
+
+        dimm.html  :   2 auxiliary, static web pages
+        meteo.html
+
+
+        blueball.gif : some static GIFs needed by the web pages
+        chile.gif
+        eso-logo.gif
+        eso.gif
+        greenball.gif
+        orangeball.gif
+        redball.gif
+        yellowball.gif
+
+    exec/
+        meteorun :     main C-shell script
+        xearth :       executable of XEarth. Sources not
+                       available. New exec available on the Net if needed.
+    archeology/
+        contains some old stuff. Will eventually be cleaned.
+
+----------------------------------------------------------------------
+
+list of the pages pointing to meteomonitor. Inform in case of URL change.
+
+Marc.Sarazin@eso.org
+http://www.eso.org/gen-fac/pubs/astclim/
+
+usg@eso.org
+http://www.eso.org/observing/weather/
+http://www.hq.eso.org/observing/support.html
+
+rhuidobr@eso.org
+http://www.ls.eso.org/
+
+2p2tweb@eso.org
+http://www.ls.eso.org/lasilla/Telescopes/2p2T/2p2T.html
+
+
+nttweb@epu.ls.eso.org
+http://www.ls.eso.org/lasilla/Telescopes/NEWNTT/nttoperations/operations.html

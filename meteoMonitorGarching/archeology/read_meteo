@@ -1,0 +1,57 @@
+#!/usr/bin/csh -f
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# .IDENTIFICATION: read_meteo
+#
+# .TYPE:           Command File
+# .LANGUAGE:       C-shell script
+# .PURPOSE:        Update meteo data
+# .AUTHOR:         Ger van Rossum
+# .VERSION  	   1.2: 26 Nov 97 ORH
+#                  1.1:    03 MAR 1992
+#
+# .DESCRIPTION:
+#   Reads the last messages from the DIMM in the OS9 system, and display
+#   files; this script should run in the background when using meteo or seeing
+#   data, because it updates these data.
+#   If an argument is given, this will be the ftp file, otherwise, check if
+#   ftpdimm or else .ftpdimm exists. If no argument is given, and no the files
+#   ftpdimm and .ftpdimm do not exist, take the ftp file to be ~/.ftpdimm.
+#
+# .ARGUMENT:
+#   optionally a file name for the ftp information file may be given
+#
+# .NOTE:
+#   - The internet number of OS9 at La Silla is 134.171.89.2.
+#   - The script ftp's the files meteo.last and dimm.last from the OS9.
+#   - meteoupdate, wich transfers seeing monitor data to a file with storage
+#     of over 24 hours of data, expects the files obtained from DIMM to
+#     be in some specific format, as they were march 1992.
+#
+# -----------------------------------------------------------------------------
+#
+# General directory names (change for new installation):
+#
+# wait for all the process to start
+sleep 100
+#touch /tmp/read_meteo.touch
+set _bin = /usr/local/meteo        # directory for the meteoupdate program
+set _tmp = /usr/local/meteo        # temporary storage directory
+#
+# Filenames of files created by the script:
+#
+set _meteo     = $_tmp/meteo.last     # current meteo data from seeing monitor
+set _seeing    = $_tmp/seeing.last    # current seeing data from seeing monitor
+set _dimm_data = $_tmp/dimm.dat       # storage for about 26 hours of data
+set _ftpdimm   = $_tmp/.ftpdimm
+#
+# Get the files from dimm every two minutes:
+# (sleep 117 ensures a total time, including execution time,
+#  of about two minutes)
+#  ftp -n 134.171.89.2 < $_ftpdimm                # do the file transfer
+#
+while (1)                                        # the update continues forever
+  ftp -n dimm < $_ftpdimm                # do the file transfer
+  $_bin/meteoupdate $_meteo $_seeing $_dimm_data # Update _dimm_data
+  sleep 100                                      # wait some time
+#  sleep 117                                      # wait some time
+end

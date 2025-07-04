@@ -1,0 +1,209 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<!--- @(#) $Id:$ --->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.76 [en] (X11; U; Linux 2.4.2-2 i686) [Netscape]">
+   <title>Meteo Information</title>
+</head>
+<body background="eso.gif">
+<a NAME="TOP"></a>
+<center><table WIDTH="100%" >
+<tr>
+<td ALIGN=LEFT><img SRC="eso-logo.gif" ALT="[ESO Logo]" ></td>
+
+<td ALIGN=RIGHT><b><font color="#FF0000"><font size=+4>Meteo Information</font></font></b></td>
+</tr>
+</table></center>
+
+<hr SIZE="2" NOSHADE>
+<h1>
+Content:</h1>
+
+<ul>
+<li>
+<b>Current situation:
+<ul>
+<li><a href="#satellite">Satellite Pictures</a></b></li>
+<li>Links to <b><a href="#moreSat">other satellite pictures</a></b></li>
+</ul>
+
+<li>
+<b><a href="#Forecast">Forecast:</a></b> ESO forecast for La Silla and Paranal</li>
+
+<li>
+<b><a href="#database">Past info:</a></b> ESO ambient condition database (since 1998), extinction (since 2001).
+
+<li>
+<a href="#ephemerides"><b>Ephemerides</b> </a>(Sun &amp; Moon tables, object
+visibility, airmass...)</li>
+</ul>
+
+<center>
+<hr WIDTH="100%"></center>
+<a NAME="satellite"></a><b><font color="#FF0000"><font size=+3>CURRENT SITUATION</font></font></b>
+<center><table BORDER NOSAVE >
+<tr NOSAVE>
+<td VALIGN=TOP NOSAVE>A view of the south pacific region, updated every
+three hours, produced using the 4th channel of the satellite GOES8 centered
+at 10.7 microns.&nbsp;
+<p>The image on the right is a zoom of that shown below.&nbsp;
+<p>The dotted lines marks the latitude/longitude with a 2 degrees spacing.&nbsp;
+<p>From <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/">ESO
+Meteo</a>'s <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/CIRA/">Satellite
+IR image</a></td>
+
+<td  ALIGN=RIGHT NOSAVE WIDTH="539">
+<img SRC="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/CIRA/images/zoom8.jpg" NOSAVE height=398 width=539></div>
+</td>
+</tr>
+
+<tr><td>
+<td ALIGN=RIGHT NOSAVE>
+<a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/CIRA/images/clouds8.jpg">
+<img SRC="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/CIRA/images/clouds8.jpg" NOSAVE BORDER=0 width=539>
+<br>click for full scale
+</a>
+
+<tr NOSAVE>
+<td VALIGN=TOP NOSAVE>Last GOES-8 image, centered on Chile,
+from University of Nottingham
+<center><img SRC="chile.gif" >
+<br>Site Location Map</center>
+</td>
+
+<td ALIGN=RIGHT NOSAVE>
+<a href="http://www.ccc.nottingham.ac.uk/pub/sat-images/LR.JPG">
+<img SRC="http://www.ccc.nottingham.ac.uk/pub/sat-images/LR.JPG" ALT="[if you see this, the link to nottingham might be down]" NOSAVE  border="0" width="539">
+<br>click for full scale
+</a>
+</td>
+</tr>
+</table></center>
+
+
+
+<!-- Here is the foot -->
+<br><a NAME="moreSat"></a><b><font size=+3>More Satellite Pictures:</font></b>
+<ul>
+<li><a href="http://www.weather.com/outlook/travel/map/CIXX0020?from=LAPmaps&name=index_large_animated&day=1">
+Animation of last 24h</a> (java) from the weather channel.
+
+<li>
+<a href="http://www.wetteronline.de/map/sat/samk/sair.htm">Wetter Online - Germany</a></li>
+
+<li>
+<a href="http://www.nottingham.ac.uk/meteosat/">Meteosat images from Nottingham</a></li>
+
+<ul>
+<li>
+<a href="http://www.nottingham.ac.uk/~cczsteve/graphif.shtml">link to the
+image page</a></li>
+
+<li>
+<b><a href="http://satpix.nottingham.ac.uk/satpix/latest/gif/LR.GIF">South
+America pic.</a></b></li>
+</ul>
+</ul>
+
+<hr WIDTH="100%">
+<h1>
+<a NAME="Forecast"></a><font color="#FF0000">FORECAST</font></h1>
+
+Based on weather forecast by ESO's <a href="http://www.eso.org/gen-fac/pubs/astclim/">Astroclimatology</a>
+team, lead by Marc Sarazin (ESO's weather and observing condition studies
+specialist), on whose <a href="http://www.eso.org/~msarazin/">page</a>
+one can find lots of information.
+<h2>
+<b><font size=+3>PTW Forecasts at Paranal and La Silla</font></b></h2>
+Forecast for <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/verification/index.html">Pressure,
+Temperature and Wind Speed</a> at Paranal and La Silla. Both numeric values
+and evolution plots are given.
+<h2>
+<b><font size=+3>Precipitable Water Vapour and Cirrus Cloud Cover Forecasts</font></b></h2>
+Launch the&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/ERASMUS/forecast.html">Java
+forecast applet&nbsp;</a></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(from <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/">ESO
+weather forecast</a>'s <a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/ERASMUS/eso_fore.html">Water
+Vapor and Cirrus Page</a>).
+<p>
+<hr WIDTH="100%">
+<h1><a NAME="database"></a><font color="#FF0000">PAST INFO</font></h1>
+
+<ul>
+<li><b>ESO Ambiant Conditions Database:</b> This <a
+href="http://archive.eso.org/asm/ambient-server">graphic interface</a>
+lets you query the weather database for La Silla and Paranal since Aug.1998
+
+<li><b>LOSSAM:</b> Line of Sight Sky Absorption Monitor, i.e. "was the night photometric". Updated daily.
+<ul>
+<li><a href="http://www.eso.org/gen-fac/pubs/astclim/lasilla/asm/lossam/">La Silla LOSSAM for last night</a>, 
+<li><a href="http://www.eso.org/gen-fac/pubs/astclim/paranal/asm/lossam/">Paranal LOSSAM for last night</a>, 
+<li><a href="http://www.eso.org/gen-fac/pubs/astclim/forecast/meteo/CIRA/images/repository/lossam/">LSO and PO LOSSAM Archive.</a>
+</ul>
+<li><b><a href="http://www.eso.org/gen-fac/pubs/astclim/lasilla/asm/scidar/">SCIDAR</a>:</b> Scintillometer experiment at La Silla.
+
+</ul>
+
+<p>
+<hr WIDTH="100%">
+<h1>
+<a NAME="ephemerides"></a><font color="#FF0000">Ephemerides</font></h1>
+
+<ul>
+<li>
+<a href="http://www.ls.eso.org/lasilla/Sun-Moon/Sun-Moon.html">Sun &amp;
+Moon Tables</a> for la Silla and for <a href="http://www.eso.org/observing/proposals/skycalc.html">other
+sites</a>.</li>
+
+<li>
+The <a href="http://imagiware.com/astro/almanac.cgi">Daily Almanac</a>
+(by Brian Casey , using Skycalc by by John Thorstensen) gives all the info
+for a given night.</li>
+
+<li>
+Sun and Moon altitude and azimuth <a href="http://riemann.usno.navy.mil/AA/data/docs/AltAz.html">tables</a>.</li>
+
+<li>
+Lots of info can also be found at the <a href="http://aa.usno.navy.mil/AA/data/">US
+Naval Observatory</a></li>
+
+<li>
+Not a link, but you may want to check out the great XEphem program, that
+can be called by running /home6/ohainaut/exec/xephem on kila; for more
+info on XEphem, go to its <a href="http://iraf.noao.edu/~ecdowney/xephem.html">home
+page</a></li>
+
+<li>
+For specific objects: <a href="http://imagiware.com/astro/observability.cgi">Object
+Seasonal Observability</a>, and the <a href="http://imagiware.com/astro/airmass.cgi">Hourly
+Airmass Table</a> (by Brian Casey, using Skycalc by by John Thorstensen)</li>
+
+<li>
+More tools and links at ESO's <a href="http://www.eso.org/observing/support.html">User
+Support Services and Tools page</a></li>
+</ul>
+
+<hr>
+<center><table BORDER=1 BGCOLOR="#EEEEEE" width="100%">
+<tr>
+<td><a href="http://epu.ls.eso.org/lasilla/dimm/close" onClick="window.close()">Close
+this window</a></th>
+
+<td ALIGN=LEFT><b>Updates:&nbsp;</b>
+<font size=-2>
+<br><b>2002-09-15:</b>orh fixed and updated links
+<br><b>2001-07-17:</b>fixed and changed links
+<br><b>1999-09-96:</b> added many links to ESO meteo
+<br><b>1999-06-21:</b> replaced broken links</font>
+<br><b>1998-04-00:</b> Creation</font>
+<br><b>Comments to <a href="mailto:jmiranda@eso.org">jmiranda@eso.org&nbsp;</a></b></th>
+
+<th><b><a href="http://www.ls.eso.org/lasilla/lasilla-homepage.html">La
+Silla&nbsp;</a></b>
+<br><b><a href="http://www.ls.eso.org/lasilla/lasilla-homepage.html">Home
+Page&nbsp;</a></b></th>
+</tr>
+</table></center>
+</body>
+</html>

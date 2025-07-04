@@ -1,0 +1,127 @@
+MeteoMonitor
+
+In case of problem, email ohainaut@eso.org
+----------------------------------------------------------------------
+
+
+
+
+
+
+----------------------------------------------------------------------
+MeteoMonitor is run on   dimm@meli
+Log on that account for all the actions described below
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+1. TO RUN THE PROGRAM
+
+$ /usr/local/bin/tcsh          ! to start the T-Cshell
+> cd meteo                     ! move to the  right directory
+> meteorun > /dev/null &       ! start
+>    ...                       ! do whatever you have to
+> exit
+$ exit
+
+
+(you have to put the /dev/null & to discard the output messages so that the
+program continues running when you log out)
+
+
+
+2. TO CHECK THAT THE PROGRAM IS RUNNING
+
+> ps -ef | grep meteo
+
+you should get  something like 
+
+    dimm  2246     1  0  Apr 25  ?         2:18 meteorun meteorun
+    dimm 25635 23871  1 02:01:10 ttyp4     0:00 grep meteo
+
+If you get only the grep meteo line, the program is not running and needs to 
+be restarted
+
+
+
+
+3. TO SET-UP A MeteoMonitor MESSAGE
+
+Edit the file  meteo/meteo_msg.txt . It contains the HTML code of what is 
+being printed at the bottom of the screen. Tratidionally, I start it with
+
+<hr><b><font color=red>Message:</font></b>
+
+to get a red, bold "Message"
+
+To get something to blink, put is between  <blink> TEXT </blink>
+To get something red, put it between       <font color-red> TEXT </font>
+To get something in bold letters,          <b>    TEXT  </b>
+
+
+
+
+----------------------------------------------------------------------
+The following is mostly for me to remember what I did.
+
+
+4. FILES EXPECTED TO BE IN THE METEO DIRECTORY
+
+
+-  meteorun : script to be called to run MeteoMonitor; calls the following:
+
+--  ftpdim  :  ftp instructions to get the data
+
+--  read_dimm : reads the data, and fills the dimm.dat database
+
+--  meteoli  : the program itself; it is obtained by compiling the 
+              source/meteoli.f fortran prog. with 
+              cd meteo/source
+              make meteoli  
+              . It needs the following:
+
+--- meteo.config : list some files and URL
+
+
+--  convert : the ImageMagick program that convert the postscript outputs of
+              meteoli into gif files. The ImageMagick directory contains all 
+              the stuff needed to make it work.
+
+--  xearth :   the program that makes the map
+
+more file:
+
+-  meteo_msg.txt: contains the message 
+
+-  dimm.dat : archive of the 800 last measurements
+
+- ImageMagick: the whole ImageMagick package; not needed
+
+- magick:     the ImageMagick stuff needed.
+
+
+----------------------------------------------------------------------
+
+list of the pages pointing to meteomonitor
+
+Marc.Sarazin@eso.org
+http://www.eso.org/gen-fac/pubs/astclim/
+
+usg@eso.org
+http://www.eso.org/observing/weather/
+http://www.hq.eso.org/observing/support.html
+
+rhuidobr@eso.org
+http://www.ls.eso.org/
+
+2p2tweb@eso.org
+http://www.ls.eso.org/lasilla/Telescopes/2p2T/2p2T.html
+
+
+nttweb@epu.ls.eso.org
+http://www.ls.eso.org/lasilla/Telescopes/NEWNTT/nttoperations/operations.html

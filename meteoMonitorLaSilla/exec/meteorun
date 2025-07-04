@@ -1,0 +1,151 @@
+#! /bin/csh
+# 
+#.file		meteorun
+#.purpose	calls the meteoli MeteoMonitor program, 
+#		converts the result in appropriate format, and
+#		loops forever
+#.usage	
+#		Debug:  		meteorun
+#		Real operation:   	meteorun >& /dev/null &
+#
+#
+# !!!  EDIT THE FILE IN SOURCE/meteoMonitor/exec, then
+# cd SOURCE/meteoMonitor/src
+# make install
+#
+
+
+# who      when       what
+# ----------------------------------------------------------------
+# ohainaut 2015-07-11 include pyrgeometer from the Danish
+# ohainaut 2010-01-10 maintenance, cleanup.
+# asegovia 2009-11-22 Commented out longexp.log tailed line and rolled back 
+#	              meteoli to previous version.
+# asegovia 2009-07-02 Tailed longexp.log file in order to match 
+#                     this file records with memory assigned on meteoli(F77)
+# ohainaut 1997-11-00 creation
+#		      needed some modifications. See program.
+# ohainaut 2003-09-04 cleaned 
+# fgutierr 2000-10-02 The new asm machine for La Silla is wlsasm.ls.eso.org
+# ohainaut 1997-11-00 creation
+#
+#
+#------------------------------------------------------------------------------
+#
+
+#- definitions:
+
+set asmWs = wlsasm.ls.eso.org
+
+#- Initializations:
+
+@ i = 1
+
+set path=(  . .. /scisoft/bin /vlt/gnu/bin /usr/local/bin /bin /usr/bin  $path)
+
+cp dimm.dat dimm.bup
+
+@ lastStored = 0
+
+while(1)
+  echo "--$i--------------"
+  date
+
+  #-- get the last data
+
+  echo "ftp"
+
+wget -N ftp://$asmWs/pub/meteo.last
+wget -N ftp://$asmWs/pub/dimm.last
+#obsolete 
+#get -N ftp://$asmWs/pub/log/longexp.log
+#overflow protection:
+# tail -n 1000 longexp.log > junk.txt # in order to get the last 1000 lines of longexp.log
+# mv junk.txt longexp.log
+
+
+
+#-- Build the meteo.last file --
+#/export/diskwa/webdocs/lasilla/lasilla/dimm/meteo_build.csh
+#obsolete?
+
+#-- read the meteo and seeing data, and add it to local db
+  echo "dbg: read_dimm"
+  rm -f dimm_new.dat
+  read_dimm
+  cp dimm_new.dat dimm.dat
+
+#-- store local UT, so meteoli can check if dimm stopped.
+#   and to be used for timestamp for the graphs
+  echo "dbg: check UT" 
+  date -u +"%H%M" >! ut.last
+
+#-- get the cloud measurement from Danish telescope
+wget http://www.asu.cas.cz/~dk154/template.html -O pyrgeo.last
+grep MEPYF pyrgeo.last | gawk -v FS="<|>" '{print $5}' >! pyrgeo.dat
+
+
+#-- create the new page and graphs.
+  echo "dbg: meteoli"
+  meteoli
+
+#-- converts the PS into GIFs
+
+   echo '(current.ps)run' | gs -q -dNOPAUSE -dNO_PAUSE -sDEVICE=ppmraw -dTextAlphaBits=4 -sOutputFile=current.ppm
+   pnmcrop < current.ppm | ppmquant 256 | ppmtogif > currentTmp.gif
+   mogrify -rotate 90 currentTmp.gif
+   mv currentTmp.gif current.gif
+
+   echo '(current_zoom.ps)run' | gs -q -dNOPAUSE -dNO_PAUSE -sDEVICE=ppmraw -dTextAlphaBits=4 -sOutputFile=current_zoom.ppm
+   pnmcrop < current_zoom.ppm | ppmquant 256 | ppmtogif > current_zoomTmp.gif
+   mogrify -rotate 90 current_zoomTmp.gif
+   mv current_zoomTmp.gif current_zoom.gif
+
+#-- create the earth map
+
+  echo "xearth"
+  xearth -proj merc -pos fixed,0,0 -gif -size 320,150 -nostars -night 35 -ncolors 16 -term 100 >! xearth.gif
+
+
+
+
+#-- housekeeping: delete old files
+#
+#   we added the egrep to protect certain files.
+
+   @ i = `ls -1 *gif | wc -l`
+
+   if ( $i > 18 ) then
+      @ i = $i - 18
+      rm `ls -1t {current,xearth}*gif | egrep -v 'current_zoom.gif|current.gif|xearth.gif' | tail -$i`
+   endif
+
+  rm -f ps_* >& /dev/null
+
+
+#-- store ps in archive
+
+  if ( `date -u +%d` != lastStored )  then
+    if ( `date -u +%H` == 10 ) then
+       cp meteomonitor.ps Archive/end`date -u +%y%m%d`.ps
+       @ lastStored =  `date -u +%d`
+    endif
+ endif
+
+
+#-- create links that force the web to load the latest version 
+# of the plot and not to use a cached version.
+# the link creation was moved here so that the current_hhmm 
+# links got created
+#
+  ln -s current.gif current_`cat ut.last`.gif
+  ln -s current_zoom.gif current_zoom_`cat ut.last`.gif
+  ln -s xearth.gif xearth_`cat ut.last`.gif
+
+
+#-- wait for next iteration
+
+  echo "done, sleeping"
+  sleep 81
+  @ i ++
+end

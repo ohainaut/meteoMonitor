@@ -1,0 +1,7 @@
+<!--- @(#) $Id:$ --->
+<hr>
+<font color="red"><b>Messages</b></font>
+<br>2010-01-10 MeteoMonitor upgraded to LaSilla-2010++ standards
+
+
+

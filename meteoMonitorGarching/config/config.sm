@@ -1,0 +1,28 @@
+# .sm file; a copy of this should be in the HOME directory in file .sm-
+name            2MeteoMonitor
+fonts		/scisoft/sm/sm/fonts.bin
+filecap		/scisoft/sm/sm/filecap
+# first +graphcap, THEN graphcap
++graphcap       /home/ohainaut/public_html/meteo/graphcap.meteoli
+graphcap	/scisoft/sm/sm/graphcap
+help		/scisoft/sm/sm/help/
+macro		/scisoft/sm/sm/macro/
+history_file	.smhist
+history		80
+temp_dir	/tmp/
+device          x11 -bg black -fg white -g 850x512+30+10
+TeX_strings 1
+
+#name            Cher_Astronome
+#fonts          /usr/local/lib/sm/fonts.bin
+#history_file    .smhist
+#history         80
+#temp_dir        /tmp/
+#filecap         /usr/local/lib/sm/filecap
+#+graphcap       /usr/local/lib/sm/graphcap.local
+#graphcap        /usr/local/lib/sm/graphcap
+#help            /usr/local/lib/sm/help/
+#macro           /usr/local/lib/sm/macro/
+#printer         postscript
+#TeX_strings     1
+

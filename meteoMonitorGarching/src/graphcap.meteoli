@@ -1,0 +1,36 @@
+#@(#) $Id:$
+ps_meteoli|blackpostscript|postscript w. coloured background (default black):\
+	 :xr#3200:yr#2390:cw#.0097:ch#.0229:\
+	 :LR=(#0!1#0!2#0!3:\
+	 :OZ= (1%d) (2%d) (3%d) SET_COLOUR\n\
+	 0 0 M 0 3300 L 2550 3300 L 2550 0 L CF\n\
+	 255 255 255 SET_COLOUR\n\
+	 2450 100 translate 90 rotate\n\
+	 \gsave\n:\
+	 :SY=mv $F $1:tc=post_colour:
+ppm|PPM|Portable PixelMap (raw), 512x512:\
+        :DV=raster:xr#512:yr#512:CL:\
+        :EP=\001:OW=P6 512 512 255\n:\
+        :OF=ppm_XXXXXX:SY=rasterise -r $0 $F $1:
+blackppm|BLACKPPM|Portable PixelMap (raw), black background, 512x512:\
+        :EP=\002:DC=white:tc=ppm:
+smallppm|SMALLPPM|Portable PixelMap (raw), 256x256:\
+        :xr#256:yr#256:\
+        :OW=P6 256 256 255\n:tc=ppm:
+meteoppm|Portable PixelMap (raw), black background, 512x512:\
+        :EP=\002:DC=white:tc=ppm:\
+        :xr#792:yr#612:\
+        :OW=P6 792 612 255\n:tc=ppm:
+gif|GIF|GIF via PPM (using ppmtogif), 512x512:\
+        :SY=rasterise -r $0 $F - | ppmtogif > $1:\
+        :tc=ppm:
+#       :SY=${BIN}/rasterise -r $0 $F - | ppmtogif | xv -geom +1+1 -:\
+smallgif|SMALLGIF|small gif (using ppmtogif) 256x256:\
+        :SY=${BIN}/rasterise -r $0 $F - | ppmtogif > $1:\
+        :tc=smallppm:
+blackgif|BLACKGIF|GIF via PPM (using ppmtogif), black bkgd, 512x512:\
+        :SY=rasterise -r $0 $F - | ppmtogif > $1:\
+        :tc=blackppm:
+meteogif|GIF via PPM (using ppmtogif), black bkgd, 512x512:\
+        :SY=rasterise -r $0 $F - | ppmtogif > $1:\
+        :tc=meteoppm:

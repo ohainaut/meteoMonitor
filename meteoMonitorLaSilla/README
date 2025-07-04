@@ -1,0 +1,61 @@
+MeteoMonitor
+USER's MANUAL
+@(#) $Id:$
+
+
+----------------------------------------------------------------------
+In case of problem, email ohainaut@eso.org
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+MeteoMonitor is run on   dimm@meli
+Log on that account for all the actions described below
+----------------------------------------------------------------------
+
+
+0. INSTALLATION / RE-INSTALLATION
+
+refer to INSTALL (Installation and Maintenance manual) in this directory
+
+
+
+1. TO RUN THE PROGRAM
+
+cd ~/dimm                      ! move to the  right directory
+meteorun >& /dev/null &        ! start (GLC 15-03-2009)
+
+(you have to put the /dev/null & to discard the output messages so that the
+program continues running when you log out)
+
+
+
+2. TO CHECK THAT THE PROGRAM IS RUNNING
+
+ps -ef | grep meteo
+
+you should get  something like 
+
+    dimm  2246     1  0  Apr 25  ?         2:18 meteorun meteorun
+    dimm 25635 23871  1 02:01:10 ttyp4     0:00 grep meteo
+
+If you get only the grep meteo line, the program is not running and needs to 
+be restarted
+
+
+
+3. TO SET-UP A MeteoMonitor MESSAGE
+
+Edit the file  dimm/meteo_msg.txt . It contains the HTML code of what is 
+being printed at the bottom of the screen. Tratidionally, I start it with
+
+<hr><b><font color=red>Message:</font></b>
+
+to get a red, bold "Message"
+
+To get something to blink, put is between  <blink> TEXT </blink>
+To get something red, put it between       <font color-red> TEXT </font>
+To get something in bold letters,          <b>    TEXT  </b>
+
+
+
+

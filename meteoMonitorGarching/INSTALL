@@ -1,0 +1,38 @@
+meteoMonitor
+
+This is an attempt to civilize the good old meteoMonitor package.
+
+
+Unpack:
+
+place the meteoMonitor directory into the destination directory,
+i.e. currently /home/web/lasilla/docs/lasilla/dimm
+(I know, THIS is not really clean. It works, OK?).
+
+
+On 2001-10-17, the files are configured properly, so
+  make all 
+in meteMonitor directory should reinstall everything.
+
+
+config:
+
+- edit config.sm (that will become SuperMongo's  ~/.sm)
+  update the paths if necessary
+
+- edit meteo.config
+  update the URLs if necessary. These are used in the automatically
+  generated web pages for reload etc.
+
+- edit meteorun
+  update the paths
+
+- make all
+
+
+src:
+
+- edit the makefile to update paths and configurations
+
+- make all install
+

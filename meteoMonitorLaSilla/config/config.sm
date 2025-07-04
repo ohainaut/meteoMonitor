@@ -1,0 +1,13 @@
+# .sm file; a copy of this should be in the HOME directory in file .sm-
+name            MeteoMonitor
+fonts		/scisoft/sm/sm2_4_2/fonts.bin
+history_file	.smhist
+history		80
+temp_dir	/tmp/
+filecap		/scisoft/sm/sm2_4_2/filecap
+# first +graphcap, THEN graphcap
++graphcap       .graphcap.meteoli
+graphcap	/scisoft/sm/sm2_4_2/graphcap
+help		/scisoft/sm/sm2_4_2/help/
+macro		/scisoft/sm/sm2_4_2/macro/
+TeX_strings 1

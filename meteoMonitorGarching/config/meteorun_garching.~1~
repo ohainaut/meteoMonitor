@@ -1,0 +1,106 @@
+#! /bin/csh
+# 
+#.file		meteorun_garching
+#.purpose	calls the meteoli MeteoMonitor program, 
+#		converts the result in appropriate format, and
+#		loops forever
+#.usage	
+#		Debug:  		meteorun
+#		Real operation:   	meteorun > /dev/null &
+#.version 	Nov97 OR.Hainaut
+#
+# 2017-02-06 oh removed ppmto gif, relies only on imageMagick
+# Modification  FG 02/oct/2000 The new asm machine for La Silla is wlsasm.ls.eso.org
+
+#- definitions:
+
+#*#*#set asmWs = wlsasm.ls.eso.org
+
+#- Initializations:
+
+@ i = 1
+
+set path=(  .  ..  /usr/local/bin  $path)
+
+/bin/cp dimm.dat dimm.bup
+
+@ lastStored = 0
+
+while(1)
+  echo "--$i--------------"
+  date
+
+  #-- get the last data
+  wget "http://www.meteo.physik.uni-muenchen.de/dokuwiki/doku.php?id=wetter:garching:neu" -O doku.txt
+
+
+  echo "dbg: read_garching"
+  read_garching
+
+  mv dimm_new.dat dimm.dat
+  rm -f ntt.last dimm.last
+
+  echo "dbg: check UT" 
+  date -u +"%H%M" >! ut.last
+
+  ln -s current.gif current_`cat ut.last`.gif
+  ln -s current_zoom.gif current_zoom_`cat ut.last`.gif
+  ln -s xearth.gif xearth_`cat ut.last`.gif
+
+
+#-- create the new page and graphs.
+  echo "meteoli"
+  meteoli_garching
+
+#-- converts the PS into GIFs
+
+   echo "convert ps to gif:"
+   echo "   current.ps"
+   echo '(current.ps)run' | gs -q -dNOPAUSE -dNO_PAUSE -sDEVICE=ppmraw -dTextAlphaBits=4 -sOutputFile=current.ppm
+  #v1
+  # pnmcrop < current.ppm | ppmquant 256 | ppmtogif > currentTmp.gif
+  # mogrify -rotate 90 currentTmp.gif
+  #v2
+   convert -rotate 90 current.ppm currentTmp.gif
+
+   mv currentTmp.gif current.gif
+
+   echo "   current_zoom.ps"
+   echo '(current_zoom.ps)run' | gs -q -dNOPAUSE -dNO_PAUSE -sDEVICE=ppmraw -dTextAlphaBits=4 -sOutputFile=current_zoom.ppm
+  #v1
+  # pnmcrop < current_zoom.ppm | ppmquant 256 | ppmtogif > current_zoomTmp.gif
+  # mogrify -rotate 90 current_zoomTmp.gif
+  #v2
+   convert -rotate 90 current_zoom.ppm current_zoomTmp.gif
+
+   mv current_zoomTmp.gif current_zoom.gif
+
+#-- create the earth map
+  echo "xearth"
+  xearth -proj merc -pos fixed,0,0 -gif -size 320,150 -nostars -night 35 -ncolors 16 -term 100 >! xearth.gif
+
+
+#-- housekeeping: delete old files
+   @ i = `ls -1 *gif | wc -l`
+
+   if ( $i > 18 ) then
+      @ i = $i - 18
+      rm `ls -1t {current,xearth}*gif | tail -$i`
+   endif
+
+  rm -f ps_* >& /dev/null
+
+#-- store ps in archive
+  if ( `date -u +%d` != lastStored )  then
+    if ( `date -u +%H` == 10 ) then
+       cp meteomonitor.ps Archive/end`date -u +%y%m%d`.ps
+       @ lastStored =  `date -u +%d`
+    endif
+ endif
+
+
+#-- wait for next iteration
+  echo "done, sleeping"
+  sleep 81
+  @ i ++
+end
